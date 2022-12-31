@@ -52,12 +52,17 @@ let geojson = {
   'features': []
 };
 
-const coordinatesList = '<%= locals.empCount %>' 
+const coordinatesList = '<%= locals.empCount %>'
+const cityList = '<%= locals.cityNames %>'
+const empNameList = '<%= locals.empNames %>'
 
 let cord_arr = coordinatesList.split(',')
+let city_arr = cityList.split(',')
+let name_arr = empNameList.split(',')
 
-let i = 0
-for (const coord of cord_arr) {
+console.log(name_arr)
+
+for (let i = 0; i < cord_arr.length; i = i + 2) {
     geojson.features.push({
       'type': 'Feature',
       'geometry': {
@@ -65,12 +70,13 @@ for (const coord of cord_arr) {
         'coordinates': [cord_arr[i], cord_arr[i+1]]
       },
       'properties': {
-        'title': 'Finch Employee',
-        'description': 'Powered by Finch'
+        'title': name_arr[i / 2],
+        'description': city_arr[i / 2]
       }
     })
-    i = i+2
 }
+
+
 
 const map = new mapboxgl.Map({
   container: 'map',

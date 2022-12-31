@@ -78,6 +78,8 @@ router
                                 });
 
         let address_data = []
+        let city_data = []
+        let name_data = []
         
 
         await axios.post('https://api.tryfinch.com/employer/individual', jsonData,
@@ -91,6 +93,8 @@ router
                 response.data['responses'].forEach(function(individual, i) 
                                             {
                                                 address_data.push(individual['body']['residence']['line1']);
+                                                city_data.push(individual['body']['residence']['city']);
+                                                name_data.push(individual['body']['first_name']);
                                             });
                                             
             })
@@ -111,7 +115,7 @@ router
                         result.forEach(function(coord, i) {
                             coordinates.push(coord.data['features'][0]['geometry']['coordinates'])
                         });
-                        res.render("users/map", { empCount: coordinates })
+                        res.render("users/map", { empCount: coordinates , cityNames: city_data , empNames: name_data })
                    }, console.error)
 })
 
