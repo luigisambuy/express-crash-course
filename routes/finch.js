@@ -3,6 +3,8 @@ const axios = require('axios')
 const router = express.Router()
 router.use(logger)
 
+// to run, use "npm i --save-dev nodemon", "nodemon server.js" and "npm run devStart" in the home directory
+
 
 router.get("/connect", (req, res) => {
     console.log("redirecting...")

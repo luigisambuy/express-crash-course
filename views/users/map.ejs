@@ -60,8 +60,6 @@ let cord_arr = coordinatesList.split(',')
 let city_arr = cityList.split(',')
 let name_arr = empNameList.split(',')
 
-console.log(name_arr)
-
 for (let i = 0; i < cord_arr.length; i = i + 2) {
     geojson.features.push({
       'type': 'Feature',
