@@ -7,8 +7,8 @@ app.use(express.json())
 
 app.set("view engine", "ejs")
 
-const userRouter = require("./routes/users")
+const finchRouter = require("./routes/finch")
 
-app.use("/users", userRouter)
+app.use("/finch", finchRouter)
 
 app.listen(3000)

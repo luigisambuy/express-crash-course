@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .marker {
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0f/Black_dot.png');
+      background-size: cover;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .mapboxgl-popup {
+      max-width: 200px;
+    }
+
+    .mapboxgl-popup-content {
+      text-align: center;
+      font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+
+
+<div id="map"></div>
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibHNhbWJ1eWZpbmNoIiwiYSI6ImNsYndxbzBsMDBvazIzcG1yb3JqMWlvYjkifQ.vF3RfSYc2XkXG-CgRXvOJA';
+
+    
+let geojson = {
+  'type': 'FeatureCollection',
+  'features': []
+};
+
+const coordinatesList = '<%= locals.empCount %>' 
+
+let cord_arr = coordinatesList.split(',')
+
+let i = 0
+for (const coord of cord_arr) {
+    geojson.features.push({
+      'type': 'Feature',
+      'geometry': {
+        'type': 'Point',
+        'coordinates': [cord_arr[i], cord_arr[i+1]]
+      },
+      'properties': {
+        'title': 'Finch Employee',
+        'description': 'Powered by Finch'
+      }
+    })
+    i = i+2
+}
+
+const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/light-v11',
+  center: [-96, 37.8],
+  zoom: 3
+});
+
+// add markers to map
+for (const feature of geojson.features) {
+  // create a HTML element for each feature
+  const el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add it to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(feature.geometry.coordinates)
+    .setPopup(
+      new mapboxgl.Popup({ offset: 25 }) // add popups
+        .setHTML(
+          `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+        )
+    )
+    .addTo(map);
+}
+</script>
+
+  
+</head>

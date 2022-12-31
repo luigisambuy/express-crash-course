@@ -1,12 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta charset="utf-8" />
+  <title>Finch Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    #finch {
+      position: absolute;
+      top: 5;
+    }
+  </style>
 </head>
+
 <body>
-  Hello World
-</body>
+  <form action="/finch/connect" method="GET">
+    <button type="submit">Submit</button>
+  </form>
+  
+
+  <!-- <form action="/finch/auth/token" method="GET">
+    <button id="connect-button">Open Finch Connect</button>
+    <script>
+      const button = document.getElementById('connect-button');
+      // const onSuccess = ({ code }) => {
+
+      //   let token_request_url = 'https://api.tryfinch.com/auth/token?'
+      //   let request = token_request_url.concat('&client_id=3cc9a4ea-db51-4b14-b772-d8f728a98164&secret=finch-secret-sandbox-5NPnmMCYrfl_gkSHA82D4wSi_lP6B-jv6lScfft5&code=',code,'&redirecturi=http://127.0.0.1:5500')
+
+      //   console.log(request);
+      //   fetch(request, {headers:{ 'Content-Type': 'application/json' }} )
+      //     .then(response => {
+      //       return response.json();
+      //     })
+      //     .then(access_token => {
+      //       console.log(access_token);
+      //     });
+      // }
+      
+      button.addEventListener('click', () => {
+        connect.open();
+      })
+    </script> -->
+  </body>
 </html>
